@@ -1,0 +1,71 @@
+{% extends 'base1.html' %}
+{% block title %}
+profiles to follow
+{% endblock title %}
+
+{% block content %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    {% for profile in profiles %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                {{ profile }}
+                <br>
+                <img src="{{ profile.photo.url }}" alt="" width="100px" height="100px">
+                <br>
+                {{ profile.bio }}
+                
+                
+                <br>
+                <a href ={% url 'profiles:profile-detail-view' profile.pk %}>
+                    <button class="btn btn-info">view profile</button>
+                </a>
+                <a href ={% url 'profiles:profile-detail-view' profile.pk %}>
+                    <button class="btn btn-info">follow</button>
+                </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-md-4">
+                <a href ={% url 'profiles:profile-show-view' user.id %}>
+                    <button class="btn btn-danger">view profile</button>
+                </a>
+                <a href ={% url 'profiles:profile-edit-view' user.id %}>
+                    <button class="btn btn-primary">edit profile</button>
+                </a>
+            </div>
+            
+        </div>
+    </div>
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+<!------ Include the above in your HEAD tag ---------->
+
+        <!--<div class="container-fluid">
+            <div class="row">
+                {% for profile in profiles %}
+                <div class="col-md-4">
+                    <div class="well well-sm">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#">
+                                <img class="media-object" src="{{profile.photo.url}}">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{profile}}</h4>
+                                <p><span class="label label-info">10 photos</span> <span class="label label-primary">89 followers</span></p>
+                                <p>
+                                    <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-comment"></span> Message</a>
+                                    <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-heart"></span> Favorite</a>
+                                    <a href="#" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-ban-circle"></span> Unfollow</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+                {% endfor %}
+            </div>
+        </div>-->
+{% endblock content %}

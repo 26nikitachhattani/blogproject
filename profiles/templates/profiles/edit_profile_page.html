@@ -1,0 +1,18 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block title %}
+{% endblock title %}
+{% block content %}
+
+<h1>EDIT PROFILE</h1>
+<div class="container">
+    <div class="row">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-secondary" type="submit"></button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
