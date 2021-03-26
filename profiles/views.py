@@ -71,7 +71,9 @@ class ProfileDetailView(DetailView):
 
     def get_objects(self, **kwargs):
         pk = self.kwargs.get('pk')
+    
         view_profile = Profile.objects.get(pk=pk)
+        #view_profile = get_object_or_404(Profile, id=self.kwargs['pk'])
         return view_profile
     
     def get_context_data(self, **kwargs):

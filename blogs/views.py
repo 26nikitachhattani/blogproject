@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate ,login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from blogs.models import blog, CommentModel
 from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.core.mail import send_mail 
 from django.contrib import messages
 from django.urls import reverse_lazy, reverse

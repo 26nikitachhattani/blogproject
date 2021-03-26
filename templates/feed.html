@@ -23,7 +23,9 @@
             .dropdown-toggle::after {
                 content: none;
                 display: none;
-            }
+        }
+
+        
     </style>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!------ Include the above in your HEAD tag ---------->
@@ -319,13 +321,13 @@
                                     <form action="{% url 'profiles:follow-unfollow-view' %}" method="POST" class="d-inline">
                                         {%csrf_token%}
                                             <input type="hidden" name="profile_pk" class="btn btn-info" value={{snips.user.id}}>
-                                            <button type="submit"  id="" class="btn btn-danger " >unfollow</button>
+                                            <button type="submit"   class="btn btn-danger " >unfollow</button>
                                        </form>
                                        {% else %}
                                        <form action="{% url 'profiles:follow-unfollow-view' %}" method="POST">
                                        {%csrf_token%}
                                            <input type="hidden" name="profile_pk" class="btn btn-info" value={{snips.user.id}}>
-                                           <button type="submit"  id="" class="btn btn-success" >follow</button>
+                                           <button type="submit"  class="btn btn-success" >follow</button>
                                        </form> 
                                     {% endif %}
                                     
@@ -368,6 +370,7 @@
                             <!--<a href="{% url 'postdetail' _id=snips.id %}" class="card-link "><i class="fa fa-book" style="color: #ed4956;"></i> Like</a>-->
                             <a href="{% url 'postdetail' _id=snips.id %}" class="card-link"><i class="fa fa-book"></i> Read</a>
                             <a href="{% url 'blog' _id=snips.id %}" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                            <a href="#" class="add-project" data-toggle="modal" data-target="#add_project">Add Project</a>
                             {% else %}
                             <a class="btn btn-outline-info" href="{% url 'signin' %}?next={{request.path}}">Signin</a><br>
                             {% endif %}
@@ -402,5 +405,8 @@
                 </div>-->
             </div>
         </div>
+
+
+         
 
 {% endblock content %}
