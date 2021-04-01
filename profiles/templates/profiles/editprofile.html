@@ -259,7 +259,7 @@ profile detail
             </form>
             <br>
             <br>
-            {% if follow  %}
+            <!--{% if follow  %}
             <form action="{% url 'profiles:follow-unfollow-view' %}" method="POST">
              {%csrf_token%}
                  <input type="hidden" name="profile_pk" class="btn btn-info" value={{object.pk}}>
@@ -267,7 +267,7 @@ profile detail
             </form>
             {% else %}
             <button type="submit" id="follow-btn" class="btn btn-success">follow</button>
-            {% endif %}
+            {% endif %}-->
         </div>
         
     </div>

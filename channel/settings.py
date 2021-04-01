@@ -24,8 +24,10 @@ SECRET_KEY = '20u%ri$%x2c^jlqnesp7a()kcq59lh#@692+bq#1m_y@+j@9_l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#DEBUG = False
+#DEBUG404 = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.redirects',
+    'django.contrib.sites',
     'profiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -129,13 +134,14 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'pythonpracticenikita@gmail.com'
-EMAIL_HOST_PASSWORD = '7999493840'
+EMAIL_HOST_PASSWORD = '9424217728'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/channel/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+#MEDIA_ROOT = '/home/admin/webapps/mainfolder/mainapp/media'
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    '/static/',
+    BASE_DIR / "static", '/static/',
 ]
 STATIC_ROOT = "channel/static/"

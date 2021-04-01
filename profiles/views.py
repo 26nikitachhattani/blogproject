@@ -15,6 +15,9 @@ from django.views import generic
 from .models import Profile
 
 # Create your views here.
+def error_404(request, exception):
+        data = {}
+        return render(request,'404.html', data)
 
 def follow_unfollow_profile(request):
     if request.method=="POST":

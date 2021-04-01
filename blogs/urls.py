@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import handler404
 from . import views
 
 urlpatterns = [
@@ -13,3 +14,4 @@ urlpatterns = [
     path('blog/<int:_id>', views.BlogDetailView, name='blog'),
     path('like/<likeid>', views.likeview, name='like'),
 ]
+handler404 = 'blogs.views.error_404'

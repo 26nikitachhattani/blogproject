@@ -16,6 +16,12 @@ from profiles.models import Profile
 
 # Create your views here.
 
+def error_404(request, exception):
+        data = {}
+        return render(request,'404.html', data)
+
+
+
 def likeview(request, likeid):
     post = get_object_or_404(blog, id=request.POST.get('post_id'))
     liked = False
@@ -35,6 +41,7 @@ def feed_show(request):
     feeds = blog.objects.all().exclude(user= request.user).order_by('-date')
     
     pros = Profile.objects.get(user=request.user)
+    prof = Profile.objects.all()
     followed = pros.following.all()
     print(feeds)
     fol = []
@@ -51,7 +58,7 @@ def feed_show(request):
             fol.append(follow)
           
     
-    return render(request,'feed.html', {'feeds': feeds, 'pros': pros, 'follow':follow,'fol':fol})
+    return render(request,'feed.html', {'feeds': feeds, 'pros': pros, 'follow':follow,'fol':fol,'prof':prof})
 
 
 # sigup for user.
