@@ -19,3 +19,12 @@ def blogDetailApiView(request,pk):
     tasks=blog.objects.get(id=pk)
     serializer = TaskSerializer(tasks, many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def BlogCreate(request):
+    serializer = TaskSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)

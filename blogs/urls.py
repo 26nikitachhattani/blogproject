@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('' ,views.feed_show, name='feed'),
+    path('listapi',views.list, name="listapi"),
     path('signup',views.signup,name='signup'),
     path('signin',views.signin,name='signin'),
     path('signout',views.signout,name='signout'),

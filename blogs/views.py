@@ -16,6 +16,10 @@ from profiles.models import Profile
 
 # Create your views here.
 
+def list(request):
+    return render(request,'frontend\list.html')
+
+
 def error_404(request, exception):
         data = {}
         return render(request,'404.html', data)
