@@ -4,8 +4,11 @@ from django.conf.urls import handler404
 from . import views
 
 urlpatterns = [
+    #--- this for without api blog list
     path('' ,views.feed_show, name='feed'),
-    path('listapi',views.list, name="listapi"),
+    #----this url for api blog list
+    path('listapi',views.lists, name="listapi"),
+    
     path('signup',views.signup,name='signup'),
     path('signin',views.signin,name='signin'),
     path('signout',views.signout,name='signout'),

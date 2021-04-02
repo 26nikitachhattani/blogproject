@@ -16,8 +16,11 @@ from profiles.models import Profile
 
 # Create your views here.
 
-def list(request):
+def lists(request):
     return render(request,'frontend\list.html')
+
+def creatblog(request):
+    return render(request,'frontend\create.html')
 
 
 def error_404(request, exception):

@@ -1,15 +1,12 @@
-{% extends 'base1.html' %}
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Blogs list</title>
-    {% block content %}
+    <title>To Do list</title>
     <style>
         body{
             background: rgb(54,217,182);
@@ -101,27 +98,22 @@
         function buildlist(){
             var wrapper = document.getElementById('list-wrapper')
             
-            var url = 'http://127.0.0.1:8000/api/post'
+            var url = 'http://127.0.0.1:8000/api/task-list'
 
             fetch(url)
             .then((resp) => resp.json())
             .then(function(data){
                 console.log('Data:', data)
-                
 
                 var list = data
-              
                 for(var i in list){
                     var item = `
                     <div id="data-row-${i}" class="task-wrapper flex-wrapper">
-                        <div style="flex:9;">
-                            <span class="title">${list[i].desc}</span>
-                           <img src="${list[i].photo}" alt="" width="200px">
-                            
+                        <div style="flex:7;">
+                            <span class="title">${list[i].title}</span>
                         </div>
                         <div style="flex:1;">
-                            <span class="title">${list[i].name}</span>
-                            <span class="title">${list[i].user}</span>
+                            <button class="btn btn-sm btn-outline-info edit">Edit </button>
                         </div>
                         <div style="flex:1;">
                             <button class="btn btn-sm btn-outline-dark delete">Delete </button>
@@ -130,12 +122,38 @@
                     `
                     wrapper.innerHTML += item
 
+                    var editBtn = document.getElementByClassName(edit)[i]
+                    editBtn.addEventListener('click')
                 }
             })
         }
 
+        var form = document.getElementById('form-wrapper')
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+            console.log('form-submitted')
+            var url = 'http://127.0.0.1:8000/api/task-create'
+            var title = document.getElementById('title').value
+
+            fetch(url, {
+                method: 'POST',
+                headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                },
+                body: JSON.stringify({'title':title})
+            }
+
+            ).then(function(responce){
+                buildlist()
+                document.getElementById('form').reset()
+            })
+        })
         
+        function editItem(){
+
+        }
     </script>
-{% endblock content %}
+
 </body>
 </html>
