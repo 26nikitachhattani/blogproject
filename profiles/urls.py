@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.urls import path
-from .views import ProfileListView, ProfileDetailView, follow_unfollow_profile, Showprofileview, Editprofilepageview
+from .views import ProfileListView, ProfileDetailView, follow_unfollow_profile, Showprofileview, Editprofilepageview,lists
 from django.conf import settings
 
 app_name = 'profile'
 
 urlpatterns = [
+    #function run for profile is without 
     path('',ProfileListView.as_view(), name='profile-list-view'),
+
+    path('listprofilesapi',lists, name="listprofilesapi"),
     path('switch-follow/',follow_unfollow_profile, name='follow-unfollow-view'),
     path('show_user_proifile/<pk>',ProfileDetailView.as_view(), name='profile-detail-view'),
     path('show_self_profile/<int:pk>',Showprofileview.as_view(), name='profile-show-view'),

@@ -1,12 +1,15 @@
+{% extends 'base1.html' %}
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>To Do list</title>
+    <title>Blogs list</title>
+    {% block content %}
     <style>
         body{
             background: rgb(54,217,182);
@@ -60,14 +63,10 @@
     <div class="container">
         <div id="task-container">
             <div id="form-wrapper">
-                <form id="form" enctype="multipart/form-data">
-                    {% csrf_token %}
+                <form id="form">
                     <div class="flex-wrapper">
                         <div style="flex: 6;">
                             <input id="title" class="form-control" type="text" name="title" placeholder="add task">
-                            <input id="desc" class="form-control" type="text" name="desc" placeholder="descripttion">
-                            <input id="image" class="form-control" type="file" name="image" >
-                            
                         </div>
                         <div style="flex: 1;">
                             <input id="submit" class="btn" type="submit" >
@@ -98,33 +97,46 @@
         }
         const csrftoken = getCookie('csrftoken');
 
-        
-        var form = document.getElementById('form-wrapper')
-        form.addEventListener('submit', function(e){
-            e.preventDefault()
-            console.log('form-submitted')
-            var url = 'http://127.0.0.1:8000/api/post/create'
-            var title = document.getElementById('title').value
-            var title = document.getElementById('desc').value
-            var title = document.getElementById('image').value
+        buildlist()
+        function buildlist(){
+            var wrapper = document.getElementById('list-wrapper')
+            
+            var url = 'http://127.0.0.1:8000/profiles/api/profiles'
 
-            fetch(url, {
-                method: 'POST',
-                headers:{
-                    'Content-type':'application/json',
-                    'X-CSRFToken':csrftoken,
-                },
-                body: JSON.stringify({'name':title,'desc':desc})
-            }
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data){
+                console.log('Data:', data)
+                
 
-            ).then(function(responce){
-                console.log(responce)
-                document.getElementById('form').reset()
+                var list = data
+              
+                for(var i in list){
+                    var item = `
+                    <div id="data-row-${i}" class="task-wrapper flex-wrapper">
+                        <div style="flex:9;">
+                            <span class="title">${list[i].bio}</span>
+                           <img src="${list[i].photo}" alt="" width="200px">
+                            
+                        </div>
+                        <div style="flex:1;">
+                            <span class="title">${list[i].name}</span>
+                            <span class="title">${list[i].user}</span>
+                            {{user.username}}
+                        </div>
+                        <div style="flex:1;">
+                            <button class="btn btn-sm btn-outline-dark delete">Delete </button>
+                        </div>
+                    </div>
+                    `
+                    wrapper.innerHTML += item
+
+                }
             })
-        })
-        
+        }
+
         
     </script>
-
+{% endblock content %}
 </body>
 </html>

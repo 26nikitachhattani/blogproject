@@ -15,6 +15,11 @@ from django.views import generic
 from .models import Profile
 
 # Create your views here.
+
+def lists(request):
+    return render(request,'profiles\list.html')
+
+
 def error_404(request, exception):
         data = {}
         return render(request,'404.html', data)

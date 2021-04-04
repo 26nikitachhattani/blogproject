@@ -13,13 +13,14 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from profiles.models import Profile
+from blogs.api.serializers import TaskSerializer
 
 # Create your views here.
 
 def lists(request):
     return render(request,'frontend\list.html')
 
-def creatblog(request):
+def postapi(request):
     return render(request,'frontend\create.html')
 
 
