@@ -18,6 +18,13 @@ class awsimageView(viewsets.ModelViewSet):
     queryset = blog.objects.all()
     serializer_class = TaskSerializer
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user = request.user)
+        return Response(serializer.data)
+
+
 
 @api_view(['GET'])
 def blogListApiView(request):

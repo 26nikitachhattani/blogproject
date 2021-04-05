@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from blogs.api.views import (blogListApiView,blogDetailApiView)
+from blogs.api.views import (blogListApiView,blogDetailApiView, awsimageView)
 from blogs.api import views
 from rest_framework import routers
 

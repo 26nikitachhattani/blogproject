@@ -1,6 +1,5 @@
 from rest_framework.serializers import ModelSerializer, FileField
 from django.contrib.auth.models import User
-
 from blogs.models import blog
 
 class TaskSerializer(ModelSerializer):
@@ -8,6 +7,5 @@ class TaskSerializer(ModelSerializer):
         
         model = blog
         photo = FileField()
-        #fields = ['name','desc','photo']
         fields = ['name' , 'photo' , 'desc']
         #fields = '__all__'
