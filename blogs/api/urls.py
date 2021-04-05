@@ -1,18 +1,18 @@
 from django.contrib import admin
-from django.urls import path
-from blogs.api.views import (
-    blogListApiView,
-    blogDetailApiView,
-    BlogCreate,
-    FileUploadView
+from django.urls import path, include
+from blogs.api.views import (blogListApiView,blogDetailApiView)
+from blogs.api import views
+from rest_framework import routers
 
-)
-from .views import *
+
+router = routers.DefaultRouter()
+router.register('awsimage', views.awsimageView)
 
 urlpatterns = [
     path('',blogListApiView, name='list'),
     path('detail/<int:pk>',blogDetailApiView, name='detail'),
-    path('create',BlogCreate, name='createpost'),
-    path('file', FileUploadView, name="file")
+    path('imageapi', include(router.urls)),
+    # path('create',BlogCreate, name='createpost'),
+    # path('file', FileUploadView, name="file")
 
 ]

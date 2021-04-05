@@ -5,12 +5,19 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from blogs.models import blog
 from .serializers import TaskSerializer
+from rest_framework import viewsets
+from rest_framework import generics, permissions
 from rest_framework import status
 
 
 # class blogListApiView(ListAPIView):
 #     queryset = blog.objects.all()
 #     serializer_class = TaskSerializer
+
+class awsimageView(viewsets.ModelViewSet):
+    queryset = blog.objects.all()
+    serializer_class = TaskSerializer
+
 
 @api_view(['GET'])
 def blogListApiView(request):
@@ -25,27 +32,27 @@ def blogDetailApiView(request,pk):
     serializer = TaskSerializer(tasks, many=False)
     return Response(serializer.data)
 
-@api_view(['POST'])
-def BlogCreate(request):
-    serializer = TaskSerializer(data=request.POST, files=request.FILES)
+# @api_view(['POST'])
+# def BlogCreate(request):
+#     serializer = TaskSerializer(data=request.POST, files=request.FILES)
     
-    if serializer.is_valid():
-        obj=serializer.save(commit = False)
-        obj.user = request.user
-        obj.save()
+#     if serializer.is_valid():
+#         obj=serializer.save(commit = False)
+#         obj.user = request.user
+#         obj.save()
 
-    return Response(serializer.data)
+#     return Response(serializer.data)
 
-@api_view(['POST'])
-class FileUploadView(APIView):
-    parser_class = (FileUploadParser)
+# @api_view(['POST'])
+# class FileUploadView(APIView):
+#     parser_class = (FileUploadParser)
 
-    def post(self, request, *args, **kwargs):
+#     def post(self, request, *args, **kwargs):
 
-      file_serializer = TaskSerializer(data=request.POST, files=request.FILES)
+#       file_serializer = TaskSerializer(data=request.POST, files=request.FILES)
 
-      if file_serializer.is_valid():
-          file_serializer.save()
-          return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-      else:
-          return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#       if file_serializer.is_valid():
+#           file_serializer.save()
+#           return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+#       else:
+#           return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
