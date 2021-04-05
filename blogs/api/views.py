@@ -4,15 +4,30 @@ from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from blogs.models import blog
-from .serializers import TaskSerializer
+from .serializers import TaskSerializer, RegisterSerializer
 from rest_framework import viewsets
 from rest_framework import generics, permissions
 from rest_framework import status
+from knox.models import AuthToken
 
 
 # class blogListApiView(ListAPIView):
 #     queryset = blog.objects.all()
 #     serializer_class = TaskSerializer
+
+
+class RegisterAPI(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+        "user": UserSerializer(user, context=self.get_serializer_context()).data,
+        "token": AuthToken.objects.create(user)[1]
+        })
+
 
 class awsimageView(viewsets.ModelViewSet):
     queryset = blog.objects.all()

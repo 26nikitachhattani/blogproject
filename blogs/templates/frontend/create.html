@@ -98,15 +98,40 @@
         }
         const csrftoken = getCookie('csrftoken');
 
+    </script>
+    <!-- <script type="text/javascript">
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
         
         var form = document.getElementById('form-wrapper')
         form.addEventListener('submit', function(e){
             e.preventDefault()
             console.log('form-submitted')
-            var url = 'http://127.0.0.1:8000/api/post/create'
+            var url = 'http://127.0.0.1:8000/api/post/imageapiawsimage/'
             var title = document.getElementById('title').value
-            var title = document.getElementById('desc').value
-            var title = document.getElementById('image').value
+            var desc = document.getElementById('desc').value
+            var image = document.getElementById('image').value
+            var newData =   {
+                  "name": title,
+                  "desc": desc,
+                  "photo": image
+                  };
+            var dataJson = JSON.stringify(newData);
 
             fetch(url, {
                 method: 'POST',
@@ -114,7 +139,7 @@
                     'Content-type':'application/json',
                     'X-CSRFToken':csrftoken,
                 },
-                body: JSON.stringify({'name':title,'desc':desc})
+                body: JSON.stringify({'name':title,'desc':desc,'photo':image})
             }
 
             ).then(function(responce){
@@ -124,7 +149,40 @@
         })
         
         
-    </script>
+    </script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        
+        $("#form").submit("click", function (event){
+             var name= $("#title").val();
+             var desc= $("#desc").val();
+             var image= $("#image").val();
+             var csrftoken = $("input[name=csrfmiddlewaretoken]").val();
+             mydata = {name: name , desc: desc, photo: image, csrfmiddlewaretoken: csrftoken}
+             var data = new FormData(this);
+            
+            //var dataJson = JSON.stringify(newData);
+
+            event.preventDefault();
+            console.log("submit")
+            alert("sunbmit");
+                jQuery.ajax({
+                 url: " /api/post/imageapiawsimage/",
+                 type: 'POST',
+                 data: new FormData(this),
+                 dataType: "json",
+                 contentType: "application/json",
+                 
+                 error : function(xhr,errmsg,err) {
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                    }
+                 
+             });
+                
+     });
+     </script>
 
 </body>
 </html>

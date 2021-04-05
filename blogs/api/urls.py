@@ -12,6 +12,7 @@ urlpatterns = [
     path('',blogListApiView, name='list'),
     path('detail/<int:pk>',blogDetailApiView, name='detail'),
     path('imageapi', include(router.urls)),
+    path('/register/', RegisterAPI.as_view(), name='register'),
     # path('create',BlogCreate, name='createpost'),
     # path('file', FileUploadView, name="file")
 
