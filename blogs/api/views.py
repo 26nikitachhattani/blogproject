@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from blogs.models import blog
-from .serializers import TaskSerializer, RegisterSerializer
+from .serializers import TaskSerializer, RegisterSerializer, UserSerializer
 from rest_framework import viewsets
 from rest_framework import generics, permissions
 from rest_framework import status
