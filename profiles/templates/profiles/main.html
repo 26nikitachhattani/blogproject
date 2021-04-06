@@ -13,6 +13,8 @@ profiles to follow
                 {{ profile }}
                 <br>
                 <img src="{{ profile.photo.url }}" alt="" width="70%" height="200px">
+                
+                
                 <br>
                 {{ profile.bio }}
                 
@@ -28,6 +30,7 @@ profiles to follow
             </div>
             {% endfor %}
             <div class="col-md-4">
+                <img src="{{ user.photo.url }}" alt="" width="70%" height="200px">
                 <a href ={% url 'profiles:profile-show-view' user.id %}>
                     <button class="btn btn-danger">view profile</button>
                 </a>
