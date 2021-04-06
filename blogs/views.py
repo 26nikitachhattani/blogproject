@@ -20,6 +20,11 @@ from blogs.api.serializers import TaskSerializer
 def lists(request):
     return render(request,'frontend\list.html')
 
+def registerapi(request):
+   
+    return render(request,'frontend\signup.html')
+
+
 def postapi(request):
    
     return render(request,'frontend\create.html')

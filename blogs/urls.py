@@ -10,6 +10,9 @@ urlpatterns = [
     path('listapi',views.lists, name="listapi"),
     
     path('signup',views.signup,name='signup'),
+
+    path('registerapi',views.registerapi,name='register'),
+
     path('signin',views.signin,name='signin'),
     path('signout',views.signout,name='signout'),
     path('post',views.post,name='post'),
