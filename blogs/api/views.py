@@ -9,11 +9,24 @@ from rest_framework import viewsets
 from rest_framework import generics, permissions
 from rest_framework import status
 from knox.models import AuthToken
+from django.contrib.auth import login
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from knox.views import LoginView as KnoxLoginView
 
 
 # class blogListApiView(ListAPIView):
 #     queryset = blog.objects.all()
 #     serializer_class = TaskSerializer
+
+class LoginAPI(KnoxLoginView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = AuthTokenSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        login(request, user)
+        return super(LoginAPI, self).post(request, format=None)
 
 
 class RegisterAPI(generics.GenericAPIView):
