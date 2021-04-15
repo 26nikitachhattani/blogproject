@@ -151,6 +151,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 #MEDIA_ROOT = '/home/admin/webapps/mainfolder/mainapp/media'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static", '/static/',
+    BASE_DIR / "static", 'frontend/build/static',
 ]
 STATIC_ROOT = "channel/static/"
